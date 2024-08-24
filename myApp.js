@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 // MY CODE HERE ==============
 const helmet = require('helmet');
-helmet.hidePoweredBy();
-
+app.use(helmet.hidePoweredBy({setTo: "PHP 4.2.0"}));
 
 // MY CODE HERE ==============
 module.exports = app;
