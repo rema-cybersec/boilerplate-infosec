@@ -2,8 +2,26 @@ const express = require('express');
 const app = express();
 // MY CODE HERE ==============
 const helmet = require('helmet');
+
 app.use(helmet.hidePoweredBy({setTo: "PHP 4.2.0"}));
 app.use(helmet.frameguard({action: 'deny'}));
+app.use(helmet.xssFilter());
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.noSniff());
+app.use(helmet.noCache());
+app.use(helmet.referrerPolicy());
+app.use(helmet.hsts({
+  maxAge: 86400,
+  includeSubDomains: true,
+}));
+app.use(helmet.contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    "style-src": ["'self'"],
+  }
+}));
+
+
 // MY CODE HERE ==============
 module.exports = app;
 const api = require('./server.js');
