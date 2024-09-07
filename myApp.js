@@ -8,6 +8,7 @@ app.use(helmet.frameguard({action: 'deny'}));
 app.use(helmet.xssFilter());
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.noSniff());
+app.use(helmet.ieNoOpen());
 app.use(helmet.noCache());
 app.use(helmet.referrerPolicy());
 app.use(helmet.hsts({
@@ -17,7 +18,8 @@ app.use(helmet.hsts({
 app.use(helmet.contentSecurityPolicy({
   useDefaults: true,
   directives: {
-    "style-src": ["'self'"],
+    "defaultSrc" : ["'self'"],
+    "scriptSrc" : ["'self'", "trusted-cdn.com"],
   }
 }));
 
